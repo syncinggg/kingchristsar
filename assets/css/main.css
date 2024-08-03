@@ -2980,7 +2980,7 @@ input, select, textarea {
 		}
 
 		.wrapper.style3 {
-			background-color: #505393;
+			background-color: #1da6b8;
 			color: #d3d4e4;
 		}
 
@@ -3411,7 +3411,7 @@ input, select, textarea {
 			position: absolute;
 			right: 0;
 			top: 0;
-			vertical-align: middle;
+			
 			width: 7em;
 		}
 
@@ -3481,6 +3481,9 @@ input, select, textarea {
 					}
 
 				}
+			#header h1 a:hover{
+				color:#00ffcc;
+			}
 
 		#header nav {
 			height: inherit;
@@ -3516,18 +3519,10 @@ input, select, textarea {
 							outline: 0;
 							position: relative;
 						}
-
-							#header nav > ul > li > a.menuToggle:after {
-								background-image: url("images/bars.svg");
-								background-position: right center;
-								background-repeat: no-repeat;
-								content: '';
-								display: inline-block;
-								height: 3.75em;
-								vertical-align: top;
-								width: 2em;
-							}
-
+						#header nav > ul > li > a.menuToggle:hover {
+							color:#4E4852;
+						}
+																				
 							@media screen and (max-width: 736px) {
 
 								#header nav > ul > li > a.menuToggle {
@@ -3918,7 +3913,7 @@ input, select, textarea {
 				margin-left: 1em;
 				padding-left: 1em;
 			}
-
+			
 				#footer .copyright li:first-child {
 					border-left: 0;
 					margin-left: 0;
@@ -3927,10 +3922,13 @@ input, select, textarea {
 
 				#footer .copyright li a {
 					color: inherit;
+					border-bottom: inherit;
 				}
 
 					#footer .copyright li a:hover {
 						color: #fff;
+						outline: none;
+						border: none;
 					}
 
 				@media screen and (max-width: 480px) {
@@ -3997,3 +3995,13 @@ input, select, textarea {
 	body.is-mobile.landing #footer {
 		background-color: #1d242a;
 	}
+.king{
+	outline: none;
+	border: none;
+}
+.king:hover{
+	color:#00f0ff;
+}
+#banner .more:hover{
+    color:#00f0ff;
+}
