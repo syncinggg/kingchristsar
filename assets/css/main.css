@@ -180,6 +180,10 @@ input, select, textarea {
 		font-size: 1.35em;
 		line-height: 1.75em;
 	}
+	h2 a {
+		outline-style: none;
+		border-style: none;
+	}
 
 		@media screen and (max-width: 736px) {
 
@@ -3439,6 +3443,11 @@ input, select, textarea {
 	}
 
 /* Header */
+    h2 a:hover{
+		color:#00f0ff;
+		border:none;
+		outline:none;
+	}
 
 	#header {
 		-moz-transition: background-color 0.2s ease;
@@ -3474,6 +3483,9 @@ input, select, textarea {
 				line-height: inherit;
 			}
 
+			#header h1 a:hover{
+				color:#00ffcc;
+			}
 				@media screen and (max-width: 736px) {
 
 					#header h1 a {
