@@ -11,37 +11,44 @@ document.querySelectorAll(".nav-link").forEach(link => {
   });
 });
 
-
 const container = document.querySelector(".card-content");
 
-let isScrolling;
+/* 🚫 DISABLE MAGNETIC ON MOBILE */
+if (window.innerWidth > 768) {
 
-container.addEventListener("scroll", () => {
-  window.clearTimeout(isScrolling);
+  let isScrolling;
 
-  isScrolling = setTimeout(() => {
-    const sections = document.querySelectorAll(".snap");
-    const scrollPos = container.scrollTop;
+  container.addEventListener("scroll", () => {
+    window.clearTimeout(isScrolling);
 
-    let closest = null;
-    let closestDistance = Infinity;
+    isScrolling = setTimeout(() => {
+      const sections = document.querySelectorAll(".snap");
+      const scrollPos = container.scrollTop;
 
-    sections.forEach(section => {
-      const offset = section.offsetTop;
-      const distance = Math.abs(offset - scrollPos);
+      let closest = null;
+      let closestDistance = Infinity;
 
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closest = section;
-      }
-    });
+      sections.forEach(section => {
+        const offset = section.offsetTop;
+        const distance = Math.abs(offset - scrollPos);
 
-    if (closest) {
-      closest.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closest = section;
+        }
       });
-    }
 
-  }, 80);
-});
+      if (closest) {
+        closest.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+    }, 80);
+  });
+
+}
+
+/* ✅ FORCE IOS-LIKE MOMENTUM FEEL */
+container.style.scrollBehavior = "smooth";

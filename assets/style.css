@@ -426,3 +426,109 @@ body::before {
 #contact .email-btn {
   margin-top: 15px;
 }
+
+/* KEEP ALL YOUR ORIGINAL CODE ABOVE EXACTLY THE SAME */
+
+/* ================= MOBILE FIXES ONLY ================= */
+@media (max-width: 768px) {
+
+  .topbar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .card {
+    top: 64%;
+    height: 85vh;
+  }
+
+  /* ✅ IOS-LIKE SCROLL */
+  .card-content {
+    scroll-snap-type: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    padding: 20px 16px;
+  }
+
+  /* ✅ ONE SCREEN PER SECTION */
+  .snap {
+    min-height: 85vh;
+    justify-content: center;
+    padding: 20px 10px;
+  }
+
+  /* ✅ ADD SPACING BETWEEN SECTIONS */
+  .snap:not(:last-child) {
+    margin-bottom: 40px;
+  }
+
+  /* ❌ REMOVE BOX LOOK */
+  .hover-card {
+    background: transparent;
+    border: none;
+    padding: 10px 0;
+  }
+
+  /* ✅ DIVIDER UNDER TITLES */
+  h2 {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  h2::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 2px;
+    margin: 8px auto 14px;
+    background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+    opacity: 0.7;
+  }
+
+  /* ✅ HOME DIVIDER */
+  .highlight-text {
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 0 10px;
+    margin-top: 14px;
+    position: relative;
+  }
+
+  .highlight-text::before {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 2px;
+    margin: 0 auto 12px;
+    background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+    opacity: 0.6;
+  }
+
+  /* TEXT CLEAN */
+  .hover-card ul li {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* PROFILE SCALE */
+  .profile-pic {
+    width: 110px;
+    height: 110px;
+  }
+
+  .name {
+    font-size: 18px;
+  }
+
+}
