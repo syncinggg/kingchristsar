@@ -1,12 +1,21 @@
+/* ─────────────────────────────────────────
+   style.css  —  King Christsar N. Maligaya
+   Theme: Win11 × macOS × Modern Glass
+   ───────────────────────────────────────── */
+
+/* ══ Design Tokens ══ */
 :root {
+  /* Background */
   --bg-deep:        #080c1a;
   --bg-surface:     rgba(255, 255, 255, 0.055);
   --bg-surface-hov: rgba(255, 255, 255, 0.09);
 
+  /* Glass */
   --glass-border:      rgba(255, 255, 255, 0.11);
   --glass-border-hov:  rgba(255, 255, 255, 0.24);
   --blur: blur(22px) saturate(180%);
 
+  /* Accents */
   --blue:          #4aa8ff;
   --blue-dark:     #0078d4;
   --blue-glow:     rgba(74, 168, 255, 0.28);
@@ -16,30 +25,37 @@
   --red:           #ff5f57;
   --yellow:        #febc2e;
 
+  /* Text */
   --text-1: #e8eeff;
   --text-2: rgba(232, 238, 255, 0.62);
   --text-3: rgba(232, 238, 255, 0.38);
 
+  /* Shape */
   --r-sm:  8px;
   --r-md:  14px;
   --r-lg:  20px;
   --r-xl:  26px;
   --r-2xl: 32px;
 
+  /* Shadow */
   --shadow-glass: 0 8px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.09);
   --shadow-glow:  0 0 50px rgba(74, 168, 255, 0.14);
 
+  /* Motion */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --t: 0.28s;
 
+  /* Layout */
   --bar-h:  42px;
   --dock-h: 76px;
 
+  /* Fonts */
   --font-d: 'Syne', sans-serif;
   --font-b: 'DM Sans', sans-serif;
 }
 
+/* ══ Reset ══ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
@@ -57,13 +73,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding-top: var(--bar-h);
   padding-bottom: calc(var(--dock-h) + 28px);
+  /* smoother momentum scrolling on iOS */
   -webkit-overflow-scrolling: touch;
+  /* prevent pull-to-refresh jank and scroll chaining */
   overscroll-behavior-y: none;
 }
 
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 
+/* ══ Background Mesh ══ */
 .bg-mesh {
   position: fixed;
   inset: 0;
@@ -111,6 +130,7 @@ img { display: block; max-width: 100%; }
   opacity: 0.45;
 }
 
+/* ══ Window Bar (macOS chrome) ══ */
 .window-bar {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -177,6 +197,7 @@ img { display: block; max-width: 100%; }
 .wc:hover { background: rgba(255,255,255,0.09); color: var(--text-1); }
 .wc-close:hover { background: var(--red); color: white; }
 
+/* ══ Main Content ══ */
 .main-content {
   position: relative;
   z-index: 1;
@@ -186,9 +207,11 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   gap: 52px;
+  /* promote to its own compositor layer for jank-free scrolling */
   will-change: transform;
 }
 
+/* ══ Glass Card ══ */
 .glass-card {
   position: relative;
   overflow: hidden;
@@ -204,6 +227,7 @@ img { display: block; max-width: 100%; }
     transform var(--t) var(--ease);
 }
 
+/* Glare sweep */
 .glass-card::before {
   content: '';
   position: absolute;
@@ -222,6 +246,7 @@ img { display: block; max-width: 100%; }
   box-shadow: var(--shadow-glass), var(--shadow-glow);
 }
 
+/* ══ Section ══ */
 .section { display: flex; flex-direction: column; gap: 22px; }
 
 .section-header { display: flex; flex-direction: column; gap: 5px; }
@@ -244,6 +269,7 @@ img { display: block; max-width: 100%; }
   line-height: 1.1;
 }
 
+/* ══ Hero ══ */
 .hero-card {
   padding: 40px 44px;
   display: flex;
@@ -251,6 +277,7 @@ img { display: block; max-width: 100%; }
   gap: 44px;
 }
 
+/* decorative glow blob inside hero */
 .hero-card::after {
   content: '';
   position: absolute;
@@ -280,8 +307,11 @@ img { display: block; max-width: 100%; }
   position: absolute;
   inset: -9px;
   border-radius: 50%;
+  /* soft glowing gradient border — no harsh mask edges */
   background: conic-gradient(from 0deg, var(--blue), var(--purple), #38bdf8, var(--blue));
+  /* blur softens the colour transitions and creates the glow bloom */
   filter: blur(3px) brightness(1.15);
+  /* re-punch a circular hole so only the ring border shows */
   -webkit-mask:
     radial-gradient(farthest-side,
       transparent calc(100% - 4px),
@@ -295,6 +325,7 @@ img { display: block; max-width: 100%; }
       transparent 100%
     );
   pointer-events: none;
+  /* extra ambient bloom behind the ring */
   box-shadow: 0 0 18px 6px rgba(74, 168, 255, 0.22),
               0 0 38px 10px rgba(167, 139, 250, 0.15);
 }
@@ -327,6 +358,7 @@ img { display: block; max-width: 100%; }
   margin-bottom: 6px;
 }
 
+/* ── Clickable Name ── */
 .hero-name-link {
   display: inline-block;
   position: relative;
@@ -342,6 +374,7 @@ img { display: block; max-width: 100%; }
   color: var(--text-1);
   letter-spacing: -0.035em;
   transition: color var(--t) var(--ease);
+  /* extra room for descenders (g, y, p…) */
   padding-bottom: 0.12em;
   overflow: visible;
 }
@@ -352,6 +385,7 @@ img { display: block; max-width: 100%; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* descender clearance so tail of g is never masked */
   padding-bottom: 0.1em;
   line-height: inherit;
 }
@@ -452,6 +486,7 @@ img { display: block; max-width: 100%; }
   margin-top: 20px;
 }
 
+/* ══ Buttons ══ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -493,6 +528,7 @@ img { display: block; max-width: 100%; }
   transform: translateY(-2px);
 }
 
+/* Download CV — glass with purple accent tint */
 .btn-cv {
   background: rgba(167, 139, 250, 0.1);
   color: var(--purple);
@@ -516,6 +552,7 @@ img { display: block; max-width: 100%; }
   margin-top: 8px;
 }
 
+/* ══ Skills Grid ══ */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -657,6 +694,7 @@ img { display: block; max-width: 100%; }
   background: linear-gradient(135deg, var(--blue), var(--purple));
 }
 
+/* ══ Certifications ══ */
 .certs-list {
   display: flex;
   flex-direction: column;
@@ -705,6 +743,7 @@ img { display: block; max-width: 100%; }
 
 .cert-card:hover .cert-glow { opacity: 1; }
 
+/* ══ Education ══ */
 .edu-card {
   padding: 30px 32px;
   display: flex;
@@ -752,6 +791,7 @@ img { display: block; max-width: 100%; }
 .chip-purple { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.24); color: var(--purple); }
 .chip-green  { background: rgba(39,200,64,0.1);   border: 1px solid rgba(39,200,64,0.22);  color: #4ade80; }
 
+/* ══ Contact ══ */
 .contact-card {
   padding: 36px 40px;
   display: flex;
@@ -773,6 +813,7 @@ img { display: block; max-width: 100%; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  /* stretch to full width regardless of parent align-items:center */
   width: 100%;
   align-self: stretch;
 }
@@ -786,6 +827,7 @@ img { display: block; max-width: 100%; }
   border-radius: var(--r-lg);
   padding: 13px 16px;
   cursor: pointer;
+  /* min-width:0 lets the flex item shrink below its content width */
   min-width: 0;
   transition:
     background var(--t) var(--ease),
@@ -833,6 +875,7 @@ img { display: block; max-width: 100%; }
 
 .contact-item:hover .ci-value { color: var(--blue); }
 
+/* ══ Dock Navigation ══ */
 .dock {
   position: fixed;
   bottom: 18px;
@@ -876,6 +919,7 @@ img { display: block; max-width: 100%; }
   transition: transform 0.18s var(--spring);
 }
 
+/* Tooltip on hover */
 .dock-item::before {
   content: attr(data-label);
   position: absolute;
@@ -903,6 +947,7 @@ img { display: block; max-width: 100%; }
   transform: translateX(-50%) translateY(0);
 }
 
+/* Active dot */
 .dock-item::after {
   content: '';
   position: absolute;
@@ -942,8 +987,10 @@ img { display: block; max-width: 100%; }
   box-shadow: 0 0 20px var(--blue-glow);
 }
 
+/* ══ Floating Download CV Button (FAB) ══ */
 .fab-cv {
   position: fixed;
+  /* sits just above the dock, right side */
   bottom: calc(var(--dock-h) + 38px);
   right: 24px;
   z-index: 850;
@@ -971,6 +1018,7 @@ img { display: block; max-width: 100%; }
     0 0 24px rgba(167, 139, 250, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
+  /* hidden by default — JS toggles .fab-cv--visible */
   opacity: 0;
   transform: translateY(14px) scale(0.93);
   pointer-events: none;
@@ -1018,6 +1066,7 @@ img { display: block; max-width: 100%; }
 
 .fab-label { line-height: 1; }
 
+/* On mobile: pill becomes icon-only circle */
 @media (max-width: 600px) {
   .fab-cv {
     bottom: calc(var(--dock-h) + env(safe-area-inset-bottom, 0px) + 18px);
@@ -1036,20 +1085,26 @@ img { display: block; max-width: 100%; }
   }
 }
 
+/* ══ Scrollbar ══ */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.13); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
 
+/* ══ Focus visible ══ */
 :focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
+/* ═══════════════════════════════════════
+   RESPONSIVE — Tablet
+   ═══════════════════════════════════════ */
 @media (max-width: 768px) {
   .hero-card { padding: 30px 28px; gap: 28px; }
   .hero-photo { width: 120px; height: 120px; }
+  /* drop to 1-col but NO max-width — let the card's own padding control width */
   .contact-grid { grid-template-columns: 1fr; }
   .contact-card { padding: 28px 22px; }
   .timeline-item { padding: 24px 26px; }
@@ -1057,6 +1112,10 @@ img { display: block; max-width: 100%; }
   .edu-emblem { font-size: 42px; }
 }
 
+/* ═══════════════════════════════════════
+   RESPONSIVE — Mobile (≤ 600px)
+   Full native-app feel
+   ═══════════════════════════════════════ */
 @media (max-width: 600px) {
   :root {
     --bar-h: 44px;
@@ -1072,9 +1131,11 @@ img { display: block; max-width: 100%; }
     gap: 38px;
   }
 
+  /* Window bar on mobile */
   .win-controls { display: none; }
   .window-title { text-align: left; font-size: 12px; }
 
+  /* Hero stacks vertically */
   .hero-card {
     flex-direction: column;
     text-align: center;
@@ -1090,6 +1151,7 @@ img { display: block; max-width: 100%; }
   .name-tooltip { left: 50%; transform: translateX(-50%) translateY(6px); }
   .hero-name-link:hover .name-tooltip { transform: translateX(-50%) translateY(0); }
 
+  /* Skills 2-col on mobile */
   .skills-grid {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -1097,6 +1159,7 @@ img { display: block; max-width: 100%; }
   .skill-card { padding: 16px 14px; border-radius: var(--r-lg); }
   .skill-icon { font-size: 24px; }
 
+  /* Dock goes full-width bottom sheet on mobile */
   .dock {
     bottom: 0;
     left: 0;
@@ -1136,10 +1199,13 @@ img { display: block; max-width: 100%; }
     padding: 24px 20px;
   }
 
+  .edu-chips { justify-content: center; }
+
   .cert-card { padding: 16px 18px; }
   .cert-badge { font-size: 28px; }
 
   .contact-card { padding: 22px 16px; }
+  /* grid already set to 1fr by tablet breakpoint; reinforce full-width */
   .contact-grid {
     grid-template-columns: 1fr;
     max-width: none;
@@ -1150,6 +1216,35 @@ img { display: block; max-width: 100%; }
   .btn-email { max-width: 100%; }
 }
 
+/* ══ Android Chrome scroll performance ══
+   GPU-composite only the fixed/floating
+   elements — keeps all card animations intact
+   ════════════════════════════════════════ */
+
+/* Fixed bars & floating button: composited so
+   backdrop-filter doesn't repaint on every frame */
+.window-bar,
+.dock,
+.fab-cv {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Blurred orbs: pre-rasterised on GPU so they
+   don't trigger repaints as you scroll past them */
+.bg-orb {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Vertical-only pan — removes Android's
+   horizontal-detection delay at scroll start */
+body {
+  touch-action: pan-y;
+}
+
+/* ══ Cisco icon — desktop/mobile swap ══ */
 .icon-mobile { display: none; }
 .icon-desktop { display: inline; }
 
